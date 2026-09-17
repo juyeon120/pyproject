@@ -54,4 +54,11 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           envs: DOCKER_USERNAME, DOCKER_REPO, DOCKER_TOKEN
           debug: true
-          time: 30s
+          timeout: 30s
+          command_timeout: 5m
+          request_pty: true
+          use_insecure_cipher: true
+          script:
+            echo "Successfully Connected"
+            echo "Starting deployment for: $DOCKER_USERNAME/$DOCKER_REPO"
+            echo "${DOCKER_TOKEN}" | sudo docker login -8 "${DOCKER_USERNAME}" --password-stdin
