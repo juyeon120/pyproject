@@ -28,6 +28,11 @@ jobs:
           python-version: "3.13"
       - run: pip install -r requirements.txt
       - name: Image build
-        run: docker build -t juyeon13241/flaskweb .
+        run: docker build -t juyeon13241/flaskweb:latest .
       - name: Image Display
         run: docker images
+      - name: Image Push 
+        uses: docker/login-action@v1
+        with:
+          username: juyeon13241
+          password: ${{ secrets.DOCKERHUB_TOKEN}}
